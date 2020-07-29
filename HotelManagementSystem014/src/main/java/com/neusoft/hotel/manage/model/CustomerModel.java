@@ -11,7 +11,23 @@ class Consume{
 	private ProductModel product= null;
 	
 	// 消费的个数
-	private int count = 0; 
+	private int count = 0;
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+	public ProductModel getProduct() {
+		return product;
+	}
+
+	public void setProduct(ProductModel product) {
+		this.product = product;
+	} 
 }
 
 

@@ -10,6 +10,11 @@ import com.neusoft.hotel.manage.model.CustomerModel;
 
 @Mapper
 public interface ICustomerMapper {
+	
+	/**
+	  *   增删改操作
+	 */
+	
 	// 增加customer
 	public void insert(CustomerModel customer) throws Exception;
 	
@@ -18,6 +23,10 @@ public interface ICustomerMapper {
 	
 	// 删除customer
 	public void delete(CustomerModel customer) throws Exception;
+	
+	/**
+	  *   通过属性查询操作
+	 */
 
 	// 通过id选择客户
 	public CustomerModel selectById(String id) throws Exception;
@@ -33,6 +42,12 @@ public interface ICustomerMapper {
 	
 	// 查找特定时间段的退房customer
 	public List<CustomerModel> selectByCheckOutTime(@Param("startDate") Date startDate, @Param("endDate") Date endDate) throws Exception;
+	
+	/**
+	  *   查询整表属性操作
+	 */
+	// 查询customer总数
+	public int selectTotal() throws Exception;
 	
 	// 分页查找所有的客户
 	public List<CustomerModel> selectListByAllWithPage(@Param("start") int start, @Param("row") int row) throws Exception;

@@ -11,6 +11,22 @@ class Service {
 	
 	// 消费个数
 	private int count = 0;
+
+	public CustomerModel getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(CustomerModel customer) {
+		this.customer = customer;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
+	}
 	
 }
 
