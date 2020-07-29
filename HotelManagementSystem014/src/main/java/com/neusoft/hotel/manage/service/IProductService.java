@@ -2,6 +2,7 @@ package com.neusoft.hotel.manage.service;
 
 import java.util.List;
 
+import com.neusoft.hotel.manage.model.CustomerModel;
 import com.neusoft.hotel.manage.model.ProductModel;
 
 //商品的业务接口
@@ -25,6 +26,7 @@ public interface IProductService {
 	List<ProductModel> getByName(String name) throws Exception;
 	//根据商品的类型取得指定的商品对象
 	List<ProductModel> getByType(String type) throws Exception;
-
+	//验证指定pid的商品是否存在
+	public boolean verifyProductExist(String pid) throws Exception;
 
 }
