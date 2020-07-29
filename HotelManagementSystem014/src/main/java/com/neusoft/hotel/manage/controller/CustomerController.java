@@ -31,10 +31,7 @@ public class CustomerController {
 		}
 		else {
 			return "顾客已存在";
-		}
-		
-		
-		
+		}	
 	}
 	
 	/**
@@ -59,7 +56,7 @@ public class CustomerController {
 	 * @throws Exception
 	 */
 	@GetMapping(value="/checkout")
-	public String delete(CustomerModel customer) throws Exception{
+	public String checkout(CustomerModel customer) throws Exception{
 		if(cs.verifyCustomerExist(customer.getId())) {
 			cs.delete(customer);
 			return "ok";
