@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.neusoft.hotel.manage.model.RoomModel;
 import com.neusoft.hotel.manage.service.IRoomService;
+import com.neusoft.hotel.restresult.Config;
+import com.neusoft.hotel.restresult.Data;
 import com.neusoft.hotel.restresult.Result;
+import com.neusoft.hotel.restresult.Status;
 
 @RestController
 @RequestMapping(value="/room")
@@ -19,100 +22,145 @@ public class RoomController {
 	private IRoomService rs=null;
 		
 	@GetMapping(value="/add")
-	public Result<String> add(RoomModel room) throws Exception{
+	public Result<?> add(RoomModel room) throws Exception{
+		Result<?> result=new Result<>();
+		Status status = new Status();
 		rs.add(room);
-		Result<String> result=new Result<String>();
-		result.setStatus("OK");
-		result.setMessage("增加房间成功！");
+		status.setStatus("OK");
+		status.setMessage("增加房间成功！");
+		result.setStatus(status);
 		return result;
 		
 	}
 
 	@PostMapping(value="/modify")
-	public Result<String> modify(RoomModel room) throws Exception{
+	public Result<?> modify(RoomModel room) throws Exception{
+		Result<?> result=new Result<>();
+		Status status = new Status();
 		rs.modify(room);
-		Result<String> result=new Result<String>();
-		result.setStatus("OK");
-		result.setMessage("更新房间成功！");
+		status.setStatus("OK");
+		status.setMessage("更新房间成功！");
+		result.setStatus(status);
 		return result;
 		
 	}
 	
 	@PostMapping(value="/delete")
-	public Result<String> delete(RoomModel room) throws Exception{
+	public Result<?> delete(RoomModel room) throws Exception{
+		Result<?> result=new Result<>();
+		Status status = new Status();
 		rs.delete(room);
-		Result<String> result=new Result<String>();
-		result.setStatus("OK");
-		result.setMessage("删除房间成功！");
+		status.setStatus("OK");
+		status.setMessage("删除房间成功！");
+		result.setStatus(status);
 		return result;
 		
 	}
 	
-	@GetMapping(value="/get")
-	public Result<RoomModel> getByRid(@RequestParam(required=true) String rid) throws Exception{
-		Result<RoomModel> result=new Result<RoomModel>();
-		result.setResult(rs.getByRid(rid));
-		result.setStatus("OK");
-		result.setMessage("按照房间号查找房间成功！");
+	@GetMapping(value="/getByRid")
+	public Result<?> getByRid(@RequestParam(required=true) String rid) throws Exception{
+		Result<RoomModel> result=new Result<>();
+		Data<RoomModel> data=new Data<RoomModel>();
+		Status status = new Status();
+		data.setObject(rs.getByRid(rid));
+		status.setStatus("OK");
+		status.setMessage("按照房间号查找房间成功！");
+		result.setData(data);
+		result.setStatus(status);
 		return result;
 		
 	}
 	
-	@GetMapping(value="/get")
+	@GetMapping(value="/getByfloor")
 	public Result<RoomModel> getByfloor(@RequestParam(required=true) int floor) throws Exception{
-		Result<RoomModel> result=new Result<RoomModel>();
-		result.setList(rs.getByFloor(floor));
-		result.setStatus("OK");
-		result.setMessage("按照楼层查找房间成功！");
+		Result<RoomModel> result=new Result<>();
+		Data<RoomModel> data=new Data<RoomModel>();
+		Status status = new Status();
+		data.setObjectList(rs.getByFloor(floor));
+		status.setStatus("OK");
+		status.setMessage("按照楼层查找房间成功！");
+		result.setData(data);
+		result.setStatus(status);
 		return result;
 		
 	}
-	@GetMapping(value="/get")
+	@GetMapping(value="/getByType")
 	public Result<RoomModel> getByType(@RequestParam(required=true) String type) throws Exception{
-		Result<RoomModel> result=new Result<RoomModel>();
-		result.setList(rs.getByType(type));
-		result.setStatus("OK");
-		result.setMessage("按照类型查找房间成功！");
+		Result<RoomModel> result=new Result<>();
+		Data<RoomModel> data=new Data<RoomModel>();
+		Status status = new Status();
+		data.setObjectList(rs.getByType(type));
+		status.setStatus("OK");
+		status.setMessage("按照类型查找房间成功！");
+		result.setData(data);
+		result.setStatus(status);
 		return result;
 		
 	}
 	
-	@GetMapping(value="/get")
-	public Result<RoomModel> geByStatus(@RequestParam(required=true) String status) throws Exception{
-		Result<RoomModel> result=new Result<RoomModel>();
-		result.setList(rs.getByStatus(status));
-		result.setStatus("OK");
-		result.setMessage("按照状态查找房间成功！");
+	@GetMapping(value="/geByStatus")
+	public Result<?> geByStatus(@RequestParam(required=true) String status) throws Exception{
+		Result<RoomModel> result=new Result<>();
+		Data<RoomModel> data=new Data<RoomModel>();
+		Status newstatus = new Status();
+		data.setObjectList(rs.getByStatus(status));
+		newstatus.setStatus("OK");
+		newstatus.setMessage("按照状态查找房间成功！");
+		result.setData(data);
+		result.setStatus(newstatus);
 		return result;
 		
 	}
 	
-	@GetMapping(value="/get")
-	public Result<RoomModel> getByPrice(@RequestParam(required=false) int lowPrice,@RequestParam(required=false) int highPrice) throws Exception{
-		Result<RoomModel> result=new Result<RoomModel>();
-		result.setList(rs.getByPrice(lowPrice, highPrice));
-		result.setStatus("OK");
-		result.setMessage("按照价格查找房间成功！");
+	@GetMapping(value="/getByPrice")
+	public Result<?> getByPrice(@RequestParam(required=false) int lowPrice,@RequestParam(required=false) int highPrice) throws Exception{
+		Result<RoomModel> result=new Result<>();
+		Data<RoomModel> data=new Data<RoomModel>();
+		Status status = new Status();
+		data.setObjectList(rs.getByPrice(lowPrice, highPrice));
+		status.setStatus("OK");
+		status.setMessage("按照价格查找房间成功！");
+		result.setData(data);
+		result.setStatus(status);
 		return result;
 		
 	}
 	
-	@GetMapping(value="/get")
-	public Result<RoomModel> getTotal() throws Exception{
-		Result<RoomModel> result=new Result<RoomModel>();
-		result.setTotal(rs.getTotal());
-		result.setStatus("OK");
-		result.setMessage("房间总数查询成功！");
+	@GetMapping(value="/getTotal")
+	public Result<?> getTotal() throws Exception{
+		Result<?> result=new Result<>();
+		Status status = new Status();
+		Config config=new Config();
+		config.setCount(rs.getTotal());
+		status.setStatus("OK");
+		status.setMessage("房间总数查询成功！");
+		result.setStatus(status);
+		result.setConfig(config);
 		return result;
 		
 	}
 	
-	@GetMapping(value="/get")
-	public Result<RoomModel> getListByAllWithPage(@RequestParam(required=false,defaultValue="10") int rows,@RequestParam(required=false,defaultValue="1") int page) throws Exception{
-		Result<RoomModel> result=new Result<RoomModel>();
-		result.setList(rs.getListByAllWithPage(rows, page));;
-		result.setStatus("OK");
-		result.setMessage("分页查找房间成功！");
+	@GetMapping(value="/getListByAllWithPage")
+	public Result<?> getListByAllWithPage(@RequestParam(required=false,defaultValue="10") int rows,@RequestParam(required=false,defaultValue="1") int page) throws Exception{
+		Result<RoomModel> result=new Result<>();
+		Status status = new Status();
+		Config config=new Config();
+		Data<RoomModel> data=new Data<RoomModel>();
+		status.setStatus("OK");
+		status.setMessage("分页查找房间成功！");
+		data.setObjectList(rs.getListByAllWithPage(rows, page));
+		int total=rs.getTotal();
+		if(total%rows==0) {
+			config.setPageCount(total/rows);
+		}else {
+			config.setPageCount(total/rows + 1);
+		}
+		config.setRows(rows);
+		config.setPage(page);
+		config.setCount(rs.getTotal());
+		result.setData(data);
+		result.setStatus(status);
+		result.setConfig(config);
 		return result;
 		
 	}

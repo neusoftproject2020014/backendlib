@@ -39,18 +39,18 @@ public class RoomServiceImpl implements IRoomService{
 	}
 
 	@Override
-	public List<RoomModel> getByFloor(int rid) throws Exception {
-		return roomMapper.selectByFloor(rid);
+	public List<RoomModel> getByFloor(int floor) throws Exception {
+		return roomMapper.selectByFloor(floor);
 	}
 
 	@Override
-	public List<RoomModel> getByType(String rid) throws Exception {
-		return roomMapper.selectByType(rid);
+	public List<RoomModel> getByType(String type) throws Exception {
+		return roomMapper.selectByType(type);
 	}
 
 	@Override
-	public List<RoomModel> getByStatus(String rid) throws Exception {
-		return roomMapper.selectByStatus(rid);
+	public List<RoomModel> getByStatus(String status) throws Exception {
+		return roomMapper.selectByStatus(status);
 	}
 
 	@Override
