@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.neusoft.hotel.manage.mapper.ICustomerMapper;
+import com.neusoft.hotel.manage.model.CustomerModel;
 import com.neusoft.hotel.manage.service.ICustomerService;
 
 @Service
@@ -13,4 +14,16 @@ public class CustomerServiceImpl implements ICustomerService{
 
 	@Autowired
 	private ICustomerMapper customerMapper=null;
+
+	@Override
+	public void add(CustomerModel customer) throws Exception {
+		customerMapper.insert(customer);
+		
+	}
+
+	@Override
+	public CustomerModel selectAll(String id) throws Exception {
+		return customerMapper.selectAll(id);
+		
+	}
 }

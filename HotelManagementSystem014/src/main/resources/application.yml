@@ -4,8 +4,8 @@ server:  port: 8201
 spring:
   datasource:
     username: root
-    password: root1234
-    url: jdbc:mysql://cd-cdb-58vghzre.sql.tencentcdb.com:6288/neusoft_hotel_system?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    password: sl488234
+    url: jdbc:mysql://101.37.19.14:3306/neusoft_hotel_system?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
     driver-class-name: com.mysql.cj.jdbc.Driver
  
 mybatis:
