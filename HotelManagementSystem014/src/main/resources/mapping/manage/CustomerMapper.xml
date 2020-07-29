@@ -34,10 +34,59 @@
  	where ID=#{id} 
  	</delete>
  	
+
+ 	<!-- 通过id选择客户 -->
  	<select id="selectById"  resultMap="CustomerResultMap">
  	select 
  	*  
  	from customer
  	where ID=#{id}
  	</select>
+ 	
+ 	<!-- 通过name选择customer -->
+ 	<select id="selectByName" resultMap="CustomerResultMap">
+ 	select * 
+ 	from customer
+ 	where NAME=#{name} 
+ 	</select>
+ 	
+ 	<!-- 通过房间号来查找customer -->
+ 	<select id="selectByRid" resultMap="CustomerResultMap">
+ 	select * 
+ 	from customer
+ 	where RID=#{rid} 
+ 	</select>
+ 	
+ 	<!-- 查找特定时间段的入住customer -->
+ 	<select id="selectByCheckInTime" resultMap="CustomerResultMap">
+ 	select * 
+ 	from customer
+ 	where CHECKINTIME <= #{endDate} and CHECKINTIME >= #{startDate} 
+ 	</select>
+ 	
+ 	<!-- 查找特定时间段的退房customer -->
+ 	<select id="selectByCheckOutTime" resultMap="CustomerResultMap">
+ 	select * 
+ 	from customer
+ 	where CHECKOUTTIME <= #{endDate} and CHECKOUTTIME >= #{startDate} 
+ 	</select>
+ 	
+ 	<!-- 查找customer总数 -->
+ 	<select id="selectTotal" resultType="_int">
+ 	select count(*)
+ 	from customer 
+ 	</select>
+ 	
+ 	<!-- 分页查找customer -->
+ 	<select id="selectListByAllWithPage" resultMap="CustomerResultMap">
+ 	select * 
+ 	from customer
+ 	limit #{start},#{rows}
+ 	</select>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
 </mapper>

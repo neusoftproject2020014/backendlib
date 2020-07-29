@@ -27,7 +27,7 @@ public interface IProductMapper {
 	 */
 	
 	// 通过商品id选择商品
-	public ProductModel selectByPid(String pid) throws Exception;
+	public ProductModel selectByPid(int pid) throws Exception;
 	
 	// 通过name来查找商品
 	public List<ProductModel> selectByName(String name) throws Exception;
@@ -43,9 +43,11 @@ public interface IProductMapper {
 	 */
 	
 	// 查询商品总数
-	public int selectTotal() throws Exception;
+	public List<ProductModel> selectByAll();
 	
 	//分页查找所有的商品
 	public List<ProductModel> selectListByAllWithPage(@Param("start") int start, @Param("row") int row) throws Exception;
+	
+	
  
 }

@@ -1,9 +1,10 @@
 package com.neusoft.hotel.manage.service.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import com.neusoft.hotel.manage.mapper.ICustomerMapper;
 import com.neusoft.hotel.manage.model.CustomerModel;
 import com.neusoft.hotel.manage.service.ICustomerService;
@@ -22,8 +23,53 @@ public class CustomerServiceImpl implements ICustomerService{
 	}
 
 	@Override
-	public CustomerModel selectAll(String id) throws Exception {
-		return customerMapper.selectById(id);
+	public void modify(CustomerModel customer) throws Exception {
+		customerMapper.update(customer);
 		
 	}
+
+	@Override
+	public void delete(CustomerModel customer) throws Exception {
+		customerMapper.delete(customer);
+	}
+
+
+	@Override
+	public CustomerModel getInfoWithRoomAndProduct(String id) throws Exception {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	@Override
+	public boolean verifyCustomerExist(String id) throws Exception {
+		return customerMapper.selectById(id) == null;
+	}
+	
+	@Override
+	public List<CustomerModel> listByAllWithPages(int page, int rows) throws Exception {
+	
+		return customerMapper.selectListByAllWithPage((page-1)*rows, rows);
+	}
+	
+	@Override
+	public int getTotal() throws Exception {
+		return customerMapper.selectTotal();
+	}
+	
+	@Override
+	public int getPageCountByAll(int rows) throws Exception {
+		int count=this.getTotal();
+		int pageCount=0;
+		if(count%rows==0) {
+			pageCount=count/rows;
+		}
+		else {
+			pageCount=count/rows+1;
+		}
+		
+		return pageCount;
+	}
+
+	
+	
 }

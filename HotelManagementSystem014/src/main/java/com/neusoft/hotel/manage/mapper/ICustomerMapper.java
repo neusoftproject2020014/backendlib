@@ -50,7 +50,7 @@ public interface ICustomerMapper {
 	public int selectTotal() throws Exception;
 	
 	// 分页查找所有的客户
-	public List<CustomerModel> selectListByAllWithPage(@Param("start") int start, @Param("row") int row) throws Exception;
+	public List<CustomerModel> selectListByAllWithPage(@Param("start") int start, @Param("rows") int rows) throws Exception;
 	
 	
 	

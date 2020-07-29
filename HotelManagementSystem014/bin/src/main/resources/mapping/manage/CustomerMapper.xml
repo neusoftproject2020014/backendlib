@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.hotel.manage.mapper.ICustomerMapper">
+	
+	<resultMap  id="CustomerResultMap" type="Customer">
+		<id property="id" column="ID" />
+		<result property="name" column="NAME"/>
+		<result property="gender" column="GENDER"/>
+		<result property="age" column="AGE"/>
+		<result property="phone" column="PHONE"/>
+		<result property="rid" column="RID"/>
+		<result property="checkintime" column="CHECKINTIME"/>
+		<result property="checkouttime" column="CHECKOUTTIME"/>
+	</resultMap>
+ 
+	<insert id="insert" parameterType="Customer" keyProperty="id"   keyColumn="ID">
+	insert into 
+	customer (ID, NAME, GENDER, AGE, PHONE, RID, CHECKINTIME, CHECKOUTTIME) 
+	values (#{id}, #{name}, #{gender}, #{age}, #{phone}, #{rid}, #{checkintime} , #{checkouttime})
+ 	</insert>
+  
+ 	<update id="update">
+ 	update  
+ 	customer
+ 	set ID=#{code}, NAME=#{name}, GENDER=#{gender}, AGE=#{age}, PHONE=#{phone},
+ 		RID=#{rid}, CHECKINTIME=#{checkintime} , CHECKOUTIME#{checkouttime}
+ 	</update>
+  
+	<delete id="delete">
+ 	delete from 
+ 	customer 
+ 	where ID=#{id} 
+ 	</delete>
+ 	
+ 	<select id="selectAll"  resultMap="CustomerResultMap">
+ 	select 
+ 	*  
+ 	from customer
+ 	where ID=#{id}
+ 	</select>
+</mapper>
