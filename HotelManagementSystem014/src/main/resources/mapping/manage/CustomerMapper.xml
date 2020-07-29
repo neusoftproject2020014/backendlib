@@ -34,6 +34,7 @@
  	where ID=#{id} 
  	</delete>
  	
+
  	<!-- 通过id选择客户 -->
  	<select id="selectById"  resultMap="CustomerResultMap">
  	select 

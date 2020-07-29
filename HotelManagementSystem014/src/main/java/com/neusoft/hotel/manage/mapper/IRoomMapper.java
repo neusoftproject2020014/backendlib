@@ -29,13 +29,13 @@ public interface IRoomMapper {
 	public RoomModel selectByRid(String rid) throws Exception;
 	
 	// 通过楼层查找
-	public List<RoomModel> selectByfloor(String rid) throws Exception;
+	public List<RoomModel> selectByFloor(int floor) throws Exception;
 	
 	// 通过房间类型查找
-	public List<RoomModel> selectByType(String rid) throws Exception;
+	public List<RoomModel> selectByType(String type) throws Exception;
 	
 	// 通过房间状态查找
-	public List<RoomModel> selectByStatus(String rid) throws Exception;
+	public List<RoomModel> selectByStatus(String status) throws Exception;
 	
 	// 通过价格范围进行查找
 	public List<RoomModel> selectByPrice(@Param("lowPrice") int lowPrice, @Param("highPrice") int highPrice) throws Exception;
@@ -47,6 +47,6 @@ public interface IRoomMapper {
 	public int selectTotal() throws Exception;
 	
 	//分页查找所有的客房
-	public List<RoomModel> selectListByAllWithPage(@Param("start") int start, @Param("row") int row) throws Exception;
+	public List<RoomModel> selectListByAllWithPage(@Param("start") int start, @Param("rows") int rows) throws Exception;
 	
 }

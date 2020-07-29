@@ -34,9 +34,9 @@ public class Result<T> {
 	public void setConfig(Config config) {
 		this.config = config;
 	}
+}
 	
 	
 	
 	
 
-}
