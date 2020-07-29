@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.hotel.manage.mapper.IRoomMapper">
+	
+	<resultMap  id="RoomResultMap" type="Room">
+		<id property="rid" column="RID" />
+		<result property="floor" column="FLOOR"/>
+		<result property="price" column="PRICE"/>
+		<result property="type" column="TYPE"/>
+		<result property="status" column="STATUS"/>
+	</resultMap>
+ 	
+ 	<!-- ======================增删改操作========================= -->
+ 	
+ 	<!-- 增加room -->
+	<insert id="insert" parameterType="Room" keyProperty="rid"   keyColumn="RID">
+	insert into 
+	room (RID, FLOOR,PRICE, TYPE, STATUS) 
+	values (#{rid}, #{floor}, #{price}, #{type}, #{status})
+ 	</insert>
+  
+  	<!-- 更新room -->
+ 	<update id="update">
+ 	update  
+ 	room
+ 	set RID=#{rid}, FLOOR=#{floor}, PRICE=#{price}, TYPE=#{type}, STATUS=#{status}
+ 	where RID=#{rid}
+ 	</update>
+  
+  	<!-- 删除room -->
+	<delete id="delete">
+ 	delete from 
+ 	room 
+ 	where RID=#{rid} 
+ 	</delete>
+ 	
+ 	<!-- ======================通过属性值进行查找========================= -->
+ 	
+ 	<!-- 通过房间号查找room -->
+ 	<select id="selectByRid"  resultMap="RoomResultMap">
+ 	select *  
+ 	from room
+ 	where RID=#{rid}
+ 	</select>
+ 	
+ 	<!-- 通过楼层查找room -->
+ 	<select id="selectByFloor"  resultMap="RoomResultMap">
+ 	select *  
+ 	from room
+ 	where FLOOR=#{floor}
+ 	</select>
+ 	
+ 	<!-- 通过房间类型查找room -->
+ 	<select id="selectByType"  resultMap="RoomResultMap">
+ 	select *  
+ 	from room
+ 	where TYPE=#{type}
+ 	</select>
+ 	
+ 	<!-- 通过房间状态查找room -->
+ 	<select id="selectByStatus"  resultMap="RoomResultMap">
+ 	select *  
+ 	from room
+ 	where STATUES=#{statues}
+ 	</select>
+ 	
+ 	<!-- 通过价格范围进行查找room -->
+ 	<select id="selectByPrice"  resultMap="RoomResultMap">
+ 	select *  
+ 	from room r
+ 	<where>
+	  <if test="lowPrice!=0">
+	  and r.PRICE &gt;=#{lowPrice}
+	  </if>
+	  <if test="highPrice!=0">
+	  and r.PRICE &lt;=#{highPrice}
+	  </if>
+  	</where>
+ 	</select>
+ 	
+ 	<!-- ======================查询整个表========================= -->
+ 	
+ 	<!-- 查询客房总数 -->
+ 	<select id="selectTotal"  resultMap="RoomResultMap">
+ 	select count(*)  
+ 	from room
+ 	</select>
+ 	
+ 	<!-- 分页查找所有的客房 -->
+ 	<select id="selectListByAllWithPage"  resultMap="RoomResultMap">
+ 	select *  
+ 	from room 
+ 	limit #{start},#{rows}
+ 	</select>
+ 	
+</mapper>

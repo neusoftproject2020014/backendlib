@@ -34,7 +34,7 @@
  	where ID=#{id} 
  	</delete>
  	
- 	<select id="selectAll"  resultMap="CustomerResultMap">
+ 	<select id="selectById"  resultMap="CustomerResultMap">
  	select 
  	*  
  	from customer
