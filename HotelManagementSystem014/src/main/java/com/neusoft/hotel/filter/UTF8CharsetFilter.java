@@ -35,7 +35,7 @@ public class UTF8CharsetFilter implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
 	
 		request.setCharacterEncoding("UTF-8");
-		System.out.println("UTF-8g过滤器工作。。。");
+		// System.out.println("UTF-8g过滤器工作。。。");
 		chain.doFilter(request, response);
 	}
 
