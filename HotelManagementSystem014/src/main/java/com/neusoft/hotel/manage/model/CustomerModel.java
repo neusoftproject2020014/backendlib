@@ -7,7 +7,10 @@ import java.util.List;
 import org.apache.ibatis.type.Alias;
 
 class Consume{
+	// 消费的商品
 	private ProductModel product= null;
+	
+	// 消费的个数
 	private int count = 0; 
 }
 
