@@ -33,6 +33,11 @@ class Consume{
 
 @Alias("Customer")
 public class CustomerModel implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 8308465260069300669L;
+
 	// 身份证号
 	private String id = null;
 	
