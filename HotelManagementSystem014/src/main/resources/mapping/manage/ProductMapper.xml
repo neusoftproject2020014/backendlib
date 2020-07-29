@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.hotel.manage.mapper.IProductMapper">
+	
+	<resultMap  id="ProductResultMap" type="Product">
+		<id property="pid" column="PID" />
+		<result property="name" column="NAME"/>
+		<result property="price" column="PRICE"/>
+		<result property="type" column="TYPR"/>
+		<result property="stock" column="STOCK"/>
+	</resultMap>
+ 
+	<insert id="insert" parameterType="Product" keyProperty="pid"   keyColumn="PID">
+	insert into 
+	product (PID, NAME, PRICE, TYPR, STOCK) 
+	values (#{pid}, #{name}, #{price}, #{type}, #{stock})
+ 	</insert>
+  
+ 	<update id="update">
+ 	update  
+ 	product
+ 	set PID=#{id}, NAME=#{name}, PRICE=#{price}, TUPE=#{type}, STOCK=#{stock}
+ 	</update>
+  
+	<delete id="delete">
+ 	delete from 
+ 	product 
+ 	where PID=#{pid} 
+ 	</delete>
+ 	
+ 	<select id="selectByPid"  resultMap="ProductResultMap">
+ 	select 
+ 	*  
+ 	from product
+ 	where PID=#{pid}
+ 	</select>
+ 	
+ 	<select id="selectByName"  resultMap="ProductResultMap">
+ 	select 
+ 	*  
+ 	from product
+ 	where Name=#{name}
+ 	</select>
+ 	
+ 	<select id="selectByType"  resultMap="ProductResultMap">
+ 	select 
+ 	*  
+ 	from product
+ 	where Type=#{type}
+ 	</select>
+ 	
+ 	<select id="selectByStockWithUpperBound" resultType="_int">
+ 	select 
+ 	*  
+ 	from product
+ 	where STOCK<=#{upperBound}
+ 	</select>
+ 	
+ 	<select id="selectTotal" resultType="_int">
+ 	select count(*)  from product
+ 	</select>
+ 	
+ 	<select id="selectListByAllWithPage" resultMap="ProductResultMap">
+ 	select *  from product limit #{start},#{rows}
+ 	</select>
+ 	
+ </mapper>
