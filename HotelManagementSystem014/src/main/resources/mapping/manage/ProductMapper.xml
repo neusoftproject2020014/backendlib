@@ -8,7 +8,7 @@
 		<id property="pid" column="PID" />
 		<result property="name" column="NAME"/>
 		<result property="price" column="PRICE"/>
-		<result property="type" column="TYPR"/>
+		<result property="type" column="TYPE"/>
 		<result property="stock" column="STOCK"/>
 	</resultMap>
  
@@ -55,7 +55,7 @@
  	select 
  	*  
  	from product
- 	where STOCK<=#{upperBound}
+ 	where STOCK &lt;=#{upperBound}
  	</select>
  	
  	<select id="selectTotal" resultType="_int">

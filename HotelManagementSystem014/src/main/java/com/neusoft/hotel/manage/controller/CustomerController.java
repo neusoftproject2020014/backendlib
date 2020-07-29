@@ -1,7 +1,5 @@
 package com.neusoft.hotel.manage.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +8,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.neusoft.hotel.manage.model.CustomerModel;
 import com.neusoft.hotel.manage.service.ICustomerService;
+import com.neusoft.hotel.restresult.Config;
+import com.neusoft.hotel.restresult.Data;
 import com.neusoft.hotel.restresult.Result;
 import com.neusoft.hotel.restresult.Status;
 
@@ -49,14 +49,20 @@ public class CustomerController {
 	 * @throws Exception
 	 */
 	@GetMapping(value="/modify")
-	public String modify(CustomerModel customer) throws Exception{
+	public Result<?> modify(CustomerModel customer) throws Exception{
+		Result<?> result = new Result<>();
+		Status status = new Status();
 		if(cs.verifyCustomerExist(customer.getId())) {
 			cs.modify(customer);
-			return "ok";
+			status.setStatus("OK");
+			status.setMessage("修改顾客信息成功");
 		}
 		else {
-			return "顾客不存在";
+			status.setStatus("ERROR");
+			status.setMessage("顾客不存在, 无法修改");
 		}
+		result.setStatus(status);
+		return result;
 	}
 	/**
 	  * 为顾客进行退房处理
@@ -65,14 +71,20 @@ public class CustomerController {
 	 * @throws Exception
 	 */
 	@GetMapping(value="/checkout")
-	public String checkout(CustomerModel customer) throws Exception{
+	public Result<?> checkout(CustomerModel customer) throws Exception{
+		Result<?> result = new Result<>();
+		Status status = new Status();
 		if(cs.verifyCustomerExist(customer.getId())) {
 			cs.delete(customer);
-			return "ok";
+			status.setStatus("OK");
+			status.setMessage("办理退房成功");
 		}
 		else {
-			return "顾客不存在";
+			status.setStatus("ERROR");
+			status.setMessage("顾客不存在, 无法办理退房");
 		}
+		result.setStatus(status);
+		return result;
 	}
 
 	/**
@@ -84,8 +96,26 @@ public class CustomerController {
 	 * @throws Exception
 	 */
 	@GetMapping(value="/list")
-	public List<CustomerModel> list(@RequestParam(required=false,defaultValue="10") int rows,@RequestParam(required=false,defaultValue="1") int page) throws Exception{
-		return cs.listByAllWithPages(page, rows);
+	public Result<CustomerModel> list(@RequestParam(required=false,defaultValue="10") int rows,@RequestParam(required=false,defaultValue="1") int page) throws Exception{
+		Result<CustomerModel> result = new Result<CustomerModel>();
+		Status status = new Status();
+		Data<CustomerModel> data = new Data<CustomerModel>();
+		Config config = new Config();
+		
+		// 设置data
+		data.setObjectList(cs.listByAllWithPages(page, rows));
+		
+		// 设置status
+		status.setStatus("OK");
+		
+		// 设置配置信息
+		config.setCount(cs.getTotal());
+		
+		result.setData(data);
+		result.setStatus(status);
+		result.setConfig(config);
+		
+		return result;
 		
 	}
 	
@@ -96,7 +126,7 @@ public class CustomerController {
 	 * @return
 	 * @throws Exception
 	 */
-	@GetMapping(value="view")
+	@GetMapping(value="/view")
 	public CustomerModel view() throws Exception{
 		return null;
 	}

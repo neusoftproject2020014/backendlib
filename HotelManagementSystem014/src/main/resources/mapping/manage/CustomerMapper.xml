@@ -18,14 +18,14 @@
 	<insert id="insert" parameterType="Customer" keyProperty="id"   keyColumn="ID">
 	insert into 
 	customer (ID, NAME, GENDER, AGE, PHONE, RID, CHECKINTIME, CHECKOUTTIME) 
-	values (#{id}, #{name}, #{gender}, #{age}, #{phone}, #{rid}, #{checkintime} , #{checkouttime})
+	values (#{id}, #{name}, #{gender}, #{age}, #{phone}, #{rid}, #{checkintime}, #{checkouttime})
  	</insert>
   
  	<update id="update">
  	update  
  	customer
  	set ID=#{code}, NAME=#{name}, GENDER=#{gender}, AGE=#{age}, PHONE=#{phone},
- 		RID=#{rid}, CHECKINTIME=#{checkintime} , CHECKOUTIME#{checkouttime}
+ 		RID=#{rid}, CHECKINTIME=#{checkintime}, CHECKOUTIME#{checkouttime}
  	</update>
   
 	<delete id="delete">
@@ -61,14 +61,14 @@
  	<select id="selectByCheckInTime" resultMap="CustomerResultMap">
  	select * 
  	from customer
- 	where CHECKINTIME <= #{endDate} and CHECKINTIME >= #{startDate} 
+ 	<!-- where CHECKINTIME &lt;= #{endDate} and CHECKINTTIME &gt;= #{startDate}  -->
  	</select>
  	
  	<!-- 查找特定时间段的退房customer -->
  	<select id="selectByCheckOutTime" resultMap="CustomerResultMap">
  	select * 
  	from customer
- 	where CHECKOUTTIME <= #{endDate} and CHECKOUTTIME >= #{startDate} 
+ 	<!-- where CHECKOUTTIME &lt;= #{endDate} and CHECKOUTTIME &gt;= #{startDate}  -->
  	</select>
  	
  	<!-- 查找customer总数 -->
@@ -81,12 +81,8 @@
  	<select id="selectListByAllWithPage" resultMap="CustomerResultMap">
  	select * 
  	from customer
- 	limit #{start},#{rows}
+ 	limit #{start}, #{rows}
  	</select>
- 	
- 	
- 	
- 	
  	
  	
 </mapper>

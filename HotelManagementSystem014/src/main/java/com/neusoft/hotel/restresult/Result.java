@@ -1,6 +1,20 @@
 package com.neusoft.hotel.restresult;
 //统一的REST API的结果类
-
+/**
+ * Result
+ * 		status
+ * 			status(ok, error)
+ * 			message
+ * 		data
+ * 			object
+ * 			object
+ * 		config
+ * 			page
+ * 			pagecount
+ * @author dell
+ *
+ * @param <T>
+ */
 public class Result<T> {
 	// 状态信息
 	private Status status;

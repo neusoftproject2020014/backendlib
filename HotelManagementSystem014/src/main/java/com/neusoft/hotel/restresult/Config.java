@@ -4,7 +4,7 @@ public class Config {
 	// 总数
 	private int count=0;
 	
-	// 每页有个数
+	// 页的总数
 	private int pageCount=0;
 	
 	// 一页的行数

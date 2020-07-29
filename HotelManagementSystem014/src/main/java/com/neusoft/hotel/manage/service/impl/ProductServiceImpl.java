@@ -76,4 +76,10 @@ public class ProductServiceImpl implements IProductService{
 		return 0;
 	}
 
+	@Override
+	public boolean verifyProductExist(String pid) throws Exception {
+		// TODO Auto-generated method stub
+		return true;
+	}
+
 }
