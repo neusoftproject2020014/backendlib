@@ -11,6 +11,7 @@ import com.neusoft.hotel.manage.model.CustomerModel;
 import com.neusoft.hotel.manage.model.ProductModel;
 import com.neusoft.hotel.manage.service.ICustomerService;
 import com.neusoft.hotel.manage.service.IProductService;
+import com.neusoft.hotel.restresult.Result;
 
 
 @RestController

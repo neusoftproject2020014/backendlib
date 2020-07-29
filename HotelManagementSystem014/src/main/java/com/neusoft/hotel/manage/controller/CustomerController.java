@@ -5,10 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.neusoft.hotel.manage.model.CustomerModel;
 import com.neusoft.hotel.manage.service.ICustomerService;
+import com.neusoft.hotel.restresult.Result;
+import com.neusoft.hotel.restresult.Status;
 
 @RestController
 @RequestMapping(value="/customer")
@@ -23,15 +26,21 @@ public class CustomerController {
 	 * @throws Exception
 	 */
 	@GetMapping(value="/checkin")
-	public String add(CustomerModel customer) throws Exception{
+	public Result<?> add(CustomerModel customer) throws Exception{
 		// 首先验证要增加的顾客是否存在
+		Result<?> result = new Result<>();
+		Status status = new Status();
 		if(!cs.verifyCustomerExist(customer.getId())) {
 			cs.add(customer);
-			return "ok";
+			status.setStatus("OK");
+			status.setMessage("办理入住成功");
 		}
 		else {
-			return "顾客已存在";
+			status.setStatus("ERROR");
+			status.setMessage("顾客已存在, 无法办理");
 		}	
+		result.setStatus(status);
+		return result;
 	}
 	
 	/**
@@ -75,7 +84,7 @@ public class CustomerController {
 	 * @throws Exception
 	 */
 	@GetMapping(value="/list")
-	public List<CustomerModel> list(int page, int rows) throws Exception{
+	public List<CustomerModel> list(@RequestParam(required=false,defaultValue="10") int rows,@RequestParam(required=false,defaultValue="1") int page) throws Exception{
 		return cs.listByAllWithPages(page, rows);
 		
 	}
