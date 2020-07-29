@@ -23,7 +23,7 @@ public class CustomerServiceImpl implements ICustomerService{
 
 	@Override
 	public CustomerModel selectAll(String id) throws Exception {
-		return customerMapper.selectAll(id);
+		return customerMapper.selectById(id);
 		
 	}
 }
