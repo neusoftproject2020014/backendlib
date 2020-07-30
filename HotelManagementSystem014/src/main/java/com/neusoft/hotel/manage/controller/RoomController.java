@@ -1,8 +1,10 @@
 package com.neusoft.hotel.manage.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,13 +18,14 @@ import com.neusoft.hotel.restresult.Status;
 
 @RestController
 @RequestMapping(value="/room")
+@CrossOrigin(origins = {"*", "null"})
 public class RoomController {
 
 	@Autowired
 	private IRoomService rs=null;
 		
-	@GetMapping(value="/add")
-	public Result<?> add(RoomModel room) throws Exception{
+	@PostMapping(value="/add")
+	public Result<?> add(@RequestBody RoomModel room) throws Exception{
 		Result<?> result=new Result<>();
 		Status status = new Status();
 		rs.add(room);
@@ -34,7 +37,7 @@ public class RoomController {
 	}
 
 	@PostMapping(value="/modify")
-	public Result<?> modify(RoomModel room) throws Exception{
+	public Result<?> modify(@RequestBody RoomModel room) throws Exception{
 		Result<?> result=new Result<>();
 		Status status = new Status();
 		rs.modify(room);
@@ -45,7 +48,7 @@ public class RoomController {
 		
 	}
 	
-	@PostMapping(value="/delete")
+	@GetMapping(value="/delete")
 	public Result<?> delete(RoomModel room) throws Exception{
 		Result<?> result=new Result<>();
 		Status status = new Status();
@@ -71,8 +74,8 @@ public class RoomController {
 		
 	}
 	
-	@GetMapping(value="/getByfloor")
-	public Result<RoomModel> getByfloor(@RequestParam(required=true) int floor) throws Exception{
+	@GetMapping(value="/getByFloor")
+	public Result<?> getByFloor(@RequestParam(required=true) int floor) throws Exception{
 		Result<RoomModel> result=new Result<>();
 		Data<RoomModel> data=new Data<RoomModel>();
 		Status status = new Status();
@@ -113,7 +116,7 @@ public class RoomController {
 	}
 	
 	@GetMapping(value="/getByPrice")
-	public Result<?> getByPrice(@RequestParam(required=false) int lowPrice,@RequestParam(required=false) int highPrice) throws Exception{
+	public Result<?> getByPrice(@RequestParam(required=false,defaultValue="0") int lowPrice,@RequestParam(required=false,defaultValue="0") int highPrice) throws Exception{
 		Result<RoomModel> result=new Result<>();
 		Data<RoomModel> data=new Data<RoomModel>();
 		Status status = new Status();

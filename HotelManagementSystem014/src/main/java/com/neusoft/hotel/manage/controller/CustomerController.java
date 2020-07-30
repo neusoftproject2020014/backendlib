@@ -32,6 +32,7 @@ public class CustomerController {
 	 */
 	@PostMapping(value="/checkin")
 	public Result<?> add(@RequestBody CustomerModel customer) throws Exception{
+
 		// 首先验证要增加的顾客是否存在
 		Result<?> result = new Result<>();
 		Status status = new Status();

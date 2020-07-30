@@ -83,7 +83,7 @@
  	<!-- ======================查询整个表========================= -->
  	
  	<!-- 查询客房总数 -->
- 	<select id="selectTotal"  resultMap="RoomResultMap">
+ 	<select id="selectTotal"  resultType="_int">
  	select count(*)  
  	from room
  	</select>
