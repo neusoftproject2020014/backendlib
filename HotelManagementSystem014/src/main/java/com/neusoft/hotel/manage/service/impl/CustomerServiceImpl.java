@@ -29,20 +29,23 @@ public class CustomerServiceImpl implements ICustomerService{
 	}
 
 	@Override
-	public void delete(CustomerModel customer) throws Exception {
-		customerMapper.delete(customer);
+	public void delete(String id) throws Exception {
+		customerMapper.delete(id);
 	}
 
+	@Override
+	public CustomerModel getInfo(String id) throws Exception {
+		return customerMapper.selectById(id);
+	}
 
 	@Override
 	public CustomerModel getInfoWithRoomAndProduct(String id) throws Exception {
-		// TODO Auto-generated method stub
-		return null;
+		return customerMapper.selectByIdWithRoomAndProduct(id);
 	}
 	
 	@Override
 	public boolean verifyCustomerExist(String id) throws Exception {
-		return customerMapper.selectById(id) == null;
+		return !(customerMapper.selectById(id)==null);
 	}
 	
 	@Override
@@ -70,6 +73,5 @@ public class CustomerServiceImpl implements ICustomerService{
 		return pageCount;
 	}
 
-	
 	
 }

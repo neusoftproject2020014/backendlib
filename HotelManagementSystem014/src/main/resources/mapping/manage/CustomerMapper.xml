@@ -14,6 +14,15 @@
 		<result property="checkintime" column="CHECKINTIME"/>
 		<result property="checkouttime" column="CHECKOUTTIME"/>
 	</resultMap>
+	
+	<resultMap type="consume" id="ConsumeResultMap">
+		<result property="count" column="COUNT"/>
+		<association property="product" resultMap="com.neusoft.hotel.manage.mapper.IProductMapper.ProductResultMap" />		
+	</resultMap>
+	<resultMap id="CustomerWithProductAndRoomResultMap" type="Customer" extends="CustomerResultMap">
+		<association property="room" resultMap="com.neusoft.hotel.manage.mapper.IRoomMapper.RoomResultMap" />
+		<collection property="consumes" resultMap="ConsumeResultMap"></collection>
+	</resultMap>
  
 	<insert id="insert" parameterType="Customer" keyProperty="id"   keyColumn="ID">
 	insert into 
@@ -24,8 +33,9 @@
  	<update id="update">
  	update  
  	customer
- 	set ID=#{code}, NAME=#{name}, GENDER=#{gender}, AGE=#{age}, PHONE=#{phone},
- 		RID=#{rid}, CHECKINTIME=#{checkintime}, CHECKOUTIME#{checkouttime}
+ 	set ID=#{id}, NAME=#{name}, GENDER=#{gender}, AGE=#{age}, PHONE=#{phone},
+ 		RID=#{rid}, CHECKINTIME=#{checkintime}, CHECKOUTTIME=#{checkouttime}
+ 	where ID=#{id}
  	</update>
   
 	<delete id="delete">
@@ -41,6 +51,16 @@
  	*  
  	from customer
  	where ID=#{id}
+ 	</select>
+ 	
+ 	<!-- 通过id来选择用户，用户对选中包含房间信息和所消耗的商品信息 -->
+ 	<select id="selectByIdWithRoomAndProduct"  resultMap="CustomerWithProductAndRoomResultMap">
+ 	select 
+ 	a.*, b.*, c.*, d.*  
+ 	from customer a inner join room b on a.RID=b.RID 
+ 	left outer join consume c on a.ID=c.ID 
+ 	left outer join product d on c.PID=d.PID
+ 	
  	</select>
  	
  	<!-- 通过name选择customer -->

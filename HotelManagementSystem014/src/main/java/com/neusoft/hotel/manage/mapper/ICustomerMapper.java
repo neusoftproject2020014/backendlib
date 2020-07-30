@@ -22,7 +22,7 @@ public interface ICustomerMapper {
 	public void update(CustomerModel customer) throws Exception;
 	
 	// 删除customer
-	public void delete(CustomerModel customer) throws Exception;
+	public void delete(String id) throws Exception;
 	
 	/**
 	  *   通过属性查询操作
@@ -30,6 +30,9 @@ public interface ICustomerMapper {
 
 	// 通过id选择客户
 	public CustomerModel selectById(String id) throws Exception;
+	
+	// 通过id来选择用户，用户对选中包含房间信息和所消耗的商品信息
+	public CustomerModel selectByIdWithRoomAndProduct(String id) throws Exception;
 	
 	// 通过name选择customer
 	public CustomerModel selectByName(String name) throws Exception;
