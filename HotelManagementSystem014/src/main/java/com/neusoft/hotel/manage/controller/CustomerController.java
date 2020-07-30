@@ -2,6 +2,7 @@ package com.neusoft.hotel.manage.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,12 +26,12 @@ public class CustomerController {
 	 * @return
 	 * @throws Exception
 	 */
-	@GetMapping(value="/checkin")
+	@PostMapping(value="/checkin")
 	public Result<?> add(CustomerModel customer) throws Exception{
 		// 首先验证要增加的顾客是否存在
 		Result<?> result = new Result<>();
 		Status status = new Status();
-		if(!cs.verifyCustomerExist(customer.getId())) {
+		if(cs.verifyCustomerExist(customer.getId())) {
 			cs.add(customer);
 			status.setStatus("OK");
 			status.setMessage("办理入住成功");
