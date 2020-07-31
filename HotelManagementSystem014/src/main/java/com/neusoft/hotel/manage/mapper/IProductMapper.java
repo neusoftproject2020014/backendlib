@@ -46,7 +46,7 @@ public interface IProductMapper {
 	public List<ProductModel> selectByAll();
 	
 	//分页查找所有的商品
-	public List<ProductModel> selectListByAllWithPage(@Param("start") int start, @Param("row") int row) throws Exception;
+	public List<ProductModel> selectListByAllWithPage(@Param("start") int start, @Param("rows") int rows) throws Exception;
 	
 	
  

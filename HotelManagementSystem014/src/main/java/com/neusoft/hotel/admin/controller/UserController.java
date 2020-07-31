@@ -61,6 +61,23 @@ public class UserController {
 		result.setStatus(status);
 		return result;
 	}
-	
+	@PostMapping(value="/destory")
+	public Result<?> destory(@RequestBody UserModel user) throws Exception{
+
+		// 首先验证要增加的顾客是否存在
+		Result<?> result = new Result<>();
+		Status status = new Status();
+		if (us.getByName(user.getName()) != null) {
+			us.destory(user.getName());
+			status.setStatus("OK");
+			status.setMessage("注销成功");
+		}
+		else {
+			status.setStatus("ERROR");
+			status.setMessage("注销失败");
+		}
+		result.setStatus(status);
+		return result;
+	}
 
 }
