@@ -1,6 +1,7 @@
 package com.neusoft.hotel.manage.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,6 +18,7 @@ import com.neusoft.hotel.restresult.Status;
 
 @RestController
 @RequestMapping(value="/room")
+@CrossOrigin(origins = {"*", "null"})
 public class RoomController {
 
 	@Autowired
@@ -46,8 +48,8 @@ public class RoomController {
 		
 	}
 	
-	@PostMapping(value="/delete")
-	public Result<?> delete(@RequestBody RoomModel room) throws Exception{
+	@GetMapping(value="/delete")
+	public Result<?> delete(RoomModel room) throws Exception{
 		Result<?> result=new Result<>();
 		Status status = new Status();
 		rs.delete(room);

@@ -25,9 +25,16 @@ public interface ICustomerService {
 	 * @param id
 	 * @throws Exception
 	 */
-	public void delete(CustomerModel customer) throws Exception;
+	public void delete(String id) throws Exception;
 	
 	
+	/**
+	  * 通过id来获得顾客信息，不包括房间和商品的详细信息
+	 * @param id
+	 * @return
+	 * @throws Exception
+	 */
+	public CustomerModel getInfo(String id) throws Exception;
 	
 	/**
 	  * 获得一个顾客的详细信息，包括房间以及商品信息

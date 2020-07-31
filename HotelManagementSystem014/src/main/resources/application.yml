@@ -10,7 +10,7 @@ spring:
  
 mybatis:
   mapper-locations: classpath:mapping/**/*.xml
-  type-aliases-package: com.neusoft.hotel.manage.model,com.neusoft.hotel.admin.model
+  type-aliases-package: com.neusoft.hotel.manage.model,com.neusoft.hotel.admin.model, com.neusoft.hotel.info.model
  
 #showSql
 logging:

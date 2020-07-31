@@ -1,6 +1,5 @@
 package com.neusoft.hotel.manage.service.impl;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,7 +8,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.neusoft.hotel.manage.mapper.IProductMapper;
 import com.neusoft.hotel.manage.model.ProductModel;
 import com.neusoft.hotel.manage.service.IProductService;
-
 
 @Service
 @Transactional  //环绕事务Advice的切入点

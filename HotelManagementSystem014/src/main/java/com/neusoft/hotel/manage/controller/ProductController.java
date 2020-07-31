@@ -1,6 +1,7 @@
 package com.neusoft.hotel.manage.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import com.neusoft.hotel.restresult.Status;
 
 @RestController
 @RequestMapping(value="/product")
+@CrossOrigin(origins = {"*", "null"})
 public class ProductController {
 	
 	@Autowired
@@ -62,7 +64,7 @@ public class ProductController {
 		return result;
 	}
 	//取得产品列表，分页模式
-	@GetMapping(value="/list/all/page")
+	@GetMapping(value="/list")
 	public Result<?> getListByAllWitgPage(@RequestParam(required=false,defaultValue="10") int rows,@RequestParam(required=false,defaultValue="1") int page) throws Exception{
 		Result<ProductModel> result = new Result<>();
 		Status status = new Status();

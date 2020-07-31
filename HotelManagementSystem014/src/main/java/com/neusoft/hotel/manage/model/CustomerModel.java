@@ -1,7 +1,7 @@
 package com.neusoft.hotel.manage.model;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.ibatis.type.Alias;
@@ -150,5 +150,13 @@ public class CustomerModel implements Serializable{
 		this.consumes = consumes;
 	}
 	
+	public int calProductCost() {
+		int cost = 0;
+		for (Consume c : consumes) {
+			cost += c.getProduct().getPrice() * c.getCount();
+		}
+		return cost;
+		
+	}
 	
 }
