@@ -13,7 +13,7 @@ public interface IProductService {
 	//修改商品
 	public void modify(ProductModel pm) throws Exception;
 	//删除商品
-	public void delete(ProductModel pm) throws Exception;
+	public void delete(int pid) throws Exception;
 	//取得所有商品列表
 	int getCountByAll() throws Exception;
 	//取得所有商品列表,分页模式

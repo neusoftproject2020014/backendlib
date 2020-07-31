@@ -14,14 +14,15 @@
  
 	<insert id="insert" parameterType="Product" keyProperty="pid"   keyColumn="PID">
 	insert into 
-	product (PID, NAME, PRICE, TYPR, STOCK) 
+	product (PID, NAME, PRICE, TYPE, STOCK) 
 	values (#{pid}, #{name}, #{price}, #{type}, #{stock})
  	</insert>
   
  	<update id="update">
  	update  
  	product
- 	set PID=#{id}, NAME=#{name}, PRICE=#{price}, TUPE=#{type}, STOCK=#{stock}
+ 	set PID=#{pid}, NAME=#{name}, PRICE=#{price}, TYPE=#{type}, STOCK=#{stock}
+ 	where PID=#{pid}
  	</update>
   
 	<delete id="delete">

@@ -20,7 +20,7 @@ public interface IProductMapper {
 	public void update(ProductModel customer) throws Exception;
 	
 	// 删除product
-	public void delete(ProductModel customer) throws Exception;
+	public void delete(int pid) throws Exception;
 	
 	/**
 	  *   通过属性值进行查找 

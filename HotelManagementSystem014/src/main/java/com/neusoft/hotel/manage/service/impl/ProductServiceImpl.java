@@ -26,8 +26,8 @@ public class ProductServiceImpl implements IProductService{
 	}
 
 	@Override
-	public void delete(ProductModel pm) throws Exception {
-		productMapper.delete(pm);
+	public void delete(int pid) throws Exception {
+		productMapper.delete(pid);
 	}
 
 	@Override

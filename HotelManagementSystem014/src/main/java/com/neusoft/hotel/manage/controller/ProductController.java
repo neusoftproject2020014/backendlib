@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,11 +28,11 @@ public class ProductController {
 	private IProductService ps=null;
 		
 	@PostMapping(value="/add")
-	public Result<?> add(ProductModel pm) throws Exception{
+	public Result<?> add(@RequestBody ProductModel pm) throws Exception{
 		// 首先验证要增加的商品是否存在
 		Result<?> result = new Result<>();
 		Status status = new Status();
-		if(!ps.verifyProductExist(pm.getPid())) {
+		if(ps.verifyProductExist(pm.getPid())) {
 			ps.add(pm);
 			status.setStatus("OK");
 			status.setMessage("增加商品成功");
@@ -45,7 +46,7 @@ public class ProductController {
 		
 	}
 	@PostMapping(value="/modify")
-	public Result<?> modify(ProductModel pm) throws Exception{
+	public Result<?> modify(@RequestBody ProductModel pm) throws Exception{
 		Result<?> result = new Result<>();
 		Status status = new Status();
 		ps.modify(pm);
@@ -54,13 +55,14 @@ public class ProductController {
 		result.setStatus(status);
 		return result;
 	}
-	@PostMapping(value="/delete")
-	public Result<String> delete(ProductModel pm) throws Exception{
+	@GetMapping(value="/delete")
+	public Result<String> delete(@RequestParam(required=true) int pid) throws Exception{
 		Status status = new Status();
-		ps.delete(pm);
+		ps.delete(pid);
 		Result<String> result=new Result<String>();
 		status.setStatus("OK");
 		status.setMessage("删除商品成功!");
+		result.setStatus(status);
 		return result;
 	}
 	//取得产品列表，分页模式

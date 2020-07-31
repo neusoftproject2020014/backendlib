@@ -36,8 +36,8 @@ public class RoomController {
 		
 	}
 
-	@GetMapping(value="/modify")
-	public Result<?> modify(RoomModel room) throws Exception{
+	@PostMapping(value="/modify")
+	public Result<?> modify(@RequestBody RoomModel room) throws Exception{
 		Result<?> result=new Result<>();
 		Status status = new Status();
 		rs.modify(room);
