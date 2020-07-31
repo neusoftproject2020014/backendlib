@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.neusoft.hotel.info.model.ReportModel;
+import com.neusoft.hotel.info.service.IReportService;
 import com.neusoft.hotel.manage.model.CustomerModel;
 import com.neusoft.hotel.manage.service.ICustomerService;
 import com.neusoft.hotel.restresult.Config;
@@ -23,6 +25,8 @@ import com.neusoft.hotel.restresult.Status;
 public class CustomerController {
 	@Autowired
 	private ICustomerService cs=null;
+	@Autowired
+	private IReportService rs = null;
 		
 	/**
 	  *  为顾客办理入住
@@ -82,7 +86,16 @@ public class CustomerController {
 		Result<?> result = new Result<>();
 		Status status = new Status();
 		if(cs.verifyCustomerExist(id)) {
+			CustomerModel deletedCustomer = cs.getInfoWithRoomAndProduct(id);
 			cs.delete(id);
+			ReportModel newReport = new ReportModel();
+			newReport.setId(deletedCustomer.getId());
+			newReport.setName(deletedCustomer.getName());
+			newReport.setCheckintime(deletedCustomer.getCheckintime());
+			newReport.setCheckouttime(new Date());
+			newReport.setRoomCost(deletedCustomer.getRoom().getPrice());
+			newReport.setProductCost(deletedCustomer.calProductCost());
+			rs.add(newReport);
 			status.setStatus("OK");
 			status.setMessage("办理退房成功");
 		}

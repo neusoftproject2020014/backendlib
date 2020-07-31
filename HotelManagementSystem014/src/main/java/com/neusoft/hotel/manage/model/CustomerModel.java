@@ -150,5 +150,13 @@ public class CustomerModel implements Serializable{
 		this.consumes = consumes;
 	}
 	
+	public int calProductCost() {
+		int cost = 0;
+		for (Consume c : consumes) {
+			cost += c.getProduct().getPrice() * c.getCount();
+		}
+		return cost;
+		
+	}
 	
 }

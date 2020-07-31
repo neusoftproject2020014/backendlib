@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.hotel.info.mapper.IReportMapper">
+	
+	<resultMap  id="ReportResultMap" type="Report">
+		<id property="no" column="No" />
+		<result property="name" column="NAME"/>
+		<result property="id" column="ID"/>
+		<result property="checkintime" column="CHECKINTIME"/>
+		<result property="checkouttime" column="CHECKOUTTIME"/>
+		<result property="roomCost" column="ROOMCOST"/>
+		<result property="productCost" column="PRODUCTCOST"/>
+	</resultMap>
+	
+	<insert id="insert" parameterType="Report" keyProperty="no"   keyColumn="NO"  useGeneratedKeys="true">
+	insert into 
+	report (NAME, ID, CHECKINTIME, CHECKOUTTIME, ROOMCOST, PRODUCTCOST)
+	values (#{name}, #{id}, #{checkintime}, #{checkouttime}, #{roomCost} ,#{productCost})
+ 	</insert>
+ 	
+ 	<update id="update">
+ 	update  
+ 	report
+ 	set NO=#{no}, NAME=#{name}, CHECKINTIME=#{checkintime}, CHECKOUTTIME=#{checkouttime}, ROOMCOST=#{roomCost}, PRODUCTCOST=#{productCost}
+ 	where NO=#{no}
+ 	</update>
+  
+	<delete id="delete">
+ 	delete from 
+ 	report 
+ 	where NO=#{no} 
+ 	</delete>
+ 	
+ 	<!-- 通过no选择report -->
+ 	<select id="selectByNo"  resultMap="ReportResultMap">
+ 	select 
+ 	*  
+ 	from Report
+ 	where No=#{no}
+ 	</select>
+ 	
+ 	<!-- 查找特定时间段的入住report -->
+ 	<select id="selectByCheckInTime"  resultMap="ReportResultMap">
+ 	select * 
+ 	from report
+ 	where CHECKINTIME &lt;= #{endDate} and CHECKINTIME &gt;= #{startDate}
+ 	</select>
+ 	
+ 	<!-- 查找特定时间段的退房report -->
+ 	<select id="selectByCheckOutTime"  resultMap="ReportResultMap">
+ 	select * 
+ 	from report
+ 	where CHECKOUTTIME &lt;= #{endDate} and CHECKOUTTIME &gt;= #{startDate}
+ 	</select>
+ 	
+ 	
+ 	<!-- 查找customer总数 -->
+ 	<select id="selectTotal" resultType="_int">
+ 	select count(*)
+ 	from report
+ 	</select>
+ 	
+ 	<!-- 分页查找customer -->
+ 	<select id="selectListByAll" resultMap="ReportResultMap">
+ 	select * 
+ 	from report
+ 	</select>
+ 	
+ 	
+ 	
+ 	
+ 	
+</mapper>

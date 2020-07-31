@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.neusoft.hotel.admin.mapper.IUserMapper">
+
+	<resultMap id="UserResultMap" type="User" >
+		<id property="uid" column="UID"/>
+		<result property="name" column="NAME"/>
+		<result property="passwd" column="PASSWD"/>
+	</resultMap>
+ 
+	<insert id="insert" parameterType="User" keyProperty="uid"   keyColumn="UID"  useGeneratedKeys="true">
+	insert into user (NAME, PASSWD) values (#{name}, #{passwd})
+ 	</insert>
+  	
+  	<delete id="delete" >
+	delete from 
+ 	user
+ 	where UID=#{uid} 
+ 	</delete>
+ 	
+ 	<update id="update">
+ 	update  
+ 	user
+ 	set UID=#{uid}, NAME=#{name}, PASSWD=#{passwd}
+ 	where UID=#{uid}
+ 	</update>
+ 	
+ 	<!-- 通过用户名选择客户 -->
+ 	<select id="selectByName"  resultMap="UserResultMap">
+ 	select 
+ 	*  
+ 	from user
+ 	where NAME=#{name}
+ 	</select>
+  	
+  
+</mapper>

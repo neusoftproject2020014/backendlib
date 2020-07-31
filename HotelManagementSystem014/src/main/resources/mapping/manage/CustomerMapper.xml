@@ -60,6 +60,7 @@
  	from customer a inner join room b on a.RID=b.RID 
  	left outer join consume c on a.ID=c.ID 
  	left outer join product d on c.PID=d.PID
+ 	where a.ID=#{id}
  	
  	</select>
  	
@@ -88,7 +89,7 @@
  	<select id="selectByCheckOutTime" resultMap="CustomerResultMap">
  	select * 
  	from customer
- 	<!-- where CHECKOUTTIME &lt;= #{endDate} and CHECKOUTTIME &gt;= #{startDate}  -->
+ 	where CHECKOUTTIME &lt;= #{endDate} and CHECKOUTTIME &gt;= #{startDate}
  	</select>
  	
  	<!-- 查找customer总数 -->
